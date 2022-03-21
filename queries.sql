@@ -12,7 +12,7 @@ select name from animals where date_of_birth between '2016-01-01'and '2019-12-31
 --  Devimon
 
 --List the name of all animals that are neutered and have less than 3 escape attempts.
-select name from animals where neutered= true and escape_attempts<=3;
+select name from animals where neutered= true and escape_attempts<3;
 --  Agumon
 --  Gabumon
 
