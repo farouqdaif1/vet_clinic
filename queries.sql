@@ -50,8 +50,11 @@ begin;
 --BEGIN
 update animals set species ='unspecified';
 --UPDATE 11
+select species from animals;
+
 rollback;
 --ROLLBACK
+select species from animals;
 /*
 
 
@@ -70,6 +73,7 @@ update animals set species ='digimon' where name like '%mon';
 -- UPDATE 6
 update animals set species ='pokemon' where species is null ;
 --UPDATE 5
+select name ,species from animals;
 commit;
 -- COMMIT
 select name ,species from animals;

@@ -32,7 +32,7 @@ values('Squirtle','1993-04-02',-12.13,false,3);
 
 
 insert into animals (name , date_of_birth,weight_kg,neutered,escape_attempts)
-values('Angemon','2005-06-12',-5.7,true,2);
+values('Angemon','2005-06-12',-45.0,true,2);
 
 --Animal: His name is Boarmon. He was born on Jun 7th, 2005, and currently weighs 20.4kg. He is neutered and he has tried to escape 7 times.
 
