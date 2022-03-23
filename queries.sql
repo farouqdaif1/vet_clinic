@@ -165,3 +165,42 @@ select species ,min(weight_kg),max(weight_kg) from animals group by species;
 -- What is the average number of escape attempts per animal type of those born between 1990 and 2000?
 select species ,round(avg(escape_attempts)) from animals where date_of_birth between '1990-01-01' and '2000-12-31' group by species;
 --  pokemon |     3
+------------------------------------------------------------------Day 3-------------------------------
+-- What animals belong to Melody Pond?
+select animals.name  from animals join owners on animals.owner_id=owners.id where full_name=' Melody Pond';
+--  Blossom
+--  Charmander
+--  Squirtle
+
+-- List of all animals that are pokemon (their type is Pokemon).
+select animals.name , species.name from animals join species on animals.species_id=species.id where species.name='Pokemon';
+--  Pikachu    | Pokemon
+--  Blossom    | Pokemon
+--  Charmander | Pokemon
+--  Squirtle   | Pokemon
+
+-- List all owners and their animals, remember to include those that don't own any animal.
+select owners.full_name ,animals.name from animals join owners on animals.owner_id =owners.id;
+--  Sam Smith        | Agumon
+--  Jennifer Orwell  | Pikachu
+--  Jennifer Orwell  | Gabumon
+--  Bob              | Devimon
+--   Melody Pond     | Squirtle
+--   Melody Pond     | Charmander
+--   Melody Pond     | Blossom
+--   Dean Winchester | Angemon
+--   Dean Winchester | Boarmon
+
+-- How many animals are there per species?
+select species.name ,count(animals.species_id) from animals join species on species.id =animals.species_id group by species.name ;
+--  Pokemon |     4
+--  Digimon |     5
+
+-- List all Digimon owned by Jennifer Orwell.
+select animals.name ,owners.full_name from animals join owners on animals.owner_id = owners.id join species on animals.species_id = owners.id where species.name='Digimon' and owners.full_name='Jennifer Orwell';
+-- Gabumon | Jennifer Orwell
+
+-- List all animals owned by Dean Winchester that haven't tried to escape.
+select animals.name from animals join owners on animals.owner_id=owners.id where owners.full_name='  Dean Winchester' and animals.escape_attempts=0;
+-- Who owns the most animals?
+--  Melody Pond |             3
