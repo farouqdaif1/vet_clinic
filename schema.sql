@@ -50,3 +50,31 @@ alter table animals add column owner_id bigint;
 
 alter table animals add constraint fk_owners foreign key (owner_id) references owners(id);
 -- ALTER TABLE
+------------------------DAY 4----------------------------------
+--Create a table named vets 
+CREATE TABLE vets(
+    id bigserial not null primary key ,
+    full_name varchar(100) not null,
+    age int  not null,
+    date_of_graduation date not null
+);
+--There is a many-to-many relationship between the tables species and vets: a vet can specialize in multiple species, and a species can have multiple vets specialized in it.
+-- Create a "join table" called specializations to handle this relationship.
+CREATE TABLE specializations(
+    id bigserial not null primary key ,
+    species_id int,
+    vets_id int,
+    CONSTRAINT fk_vets FOREIGN KEY(vets_id) REFERENCES vets(id),
+    CONSTRAINT fk_species FOREIGN KEY(species_id) REFERENCES species(id)
+);
+--There is a many-to-many relationship between the tables animals and vets: an animal can visit multiple vets and one vet can be visited by multiple animals.
+-- Create a "join table" called visits to handle this relationship, it should also keep track of the date of the visit.
+CREATE TABLE visits(
+    id bigserial not null primary key ,
+    animal_id int,
+    vets_id int,
+    date_of_visit date,
+    CONSTRAINT fk_vets FOREIGN KEY(vets_id) REFERENCES vets(id),
+    CONSTRAINT fk_animals FOREIGN KEY(animal_id) REFERENCES animals(id)
+);
+

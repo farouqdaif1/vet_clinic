@@ -203,4 +203,150 @@ select animals.name ,owners.full_name from animals join owners on animals.owner_
 -- List all animals owned by Dean Winchester that haven't tried to escape.
 select animals.name from animals join owners on animals.owner_id=owners.id where owners.full_name='  Dean Winchester' and animals.escape_attempts=0;
 -- Who owns the most animals?
+select owners.full_name ,count(animals.owner_id) as owned_animals   from animals join owners on owners.id = animals.owner_id group by owners.full_name order by owned_animals desc  limit 1 ;
 --  Melody Pond |             3
+------------------------DAY 4----------------------------------
+
+--Who was the last animal seen by William Tatcher?
+SELECT vets.full_name, animals.name,visits.date_of_visit 
+FROM vets 
+JOIN visits 
+ON vets.id=visits.vets_id
+JOIN animals 
+ON animals.id= visits.animal_id 
+WHERE vets.full_name ='William Tatche' 
+ORDER BY visits.date_of_visit 
+DESC LIMIT 1;
+/*
+name       |  name   | date_of_visit
+-----------------+---------+---------------
+William Tatche | Blossom | 2021-01-11
+(1 row)
+*/
+
+--How many different animals did Stephanie Mendez see?
+SELECT COUNT(animal_id)
+FROM visits
+JOIN  vets 
+ON vets.id=visits.vets_id
+where full_name= 'Stephanie Mendez';
+/* count
+-------
+    3
+(1 row)*/
+
+--List all vets and their specialties, including vets with no specialties.
+SELECT vets.full_name ,species.name as specializations
+FROM vets
+LEFT JOIN specializations 
+ON vets.id=specializations.vets_id
+LEFT JOIN species 
+ON species.id=specializations.species_id;
+
+/*    full_name     | specializations
+------------------+-----------------
+ William Tatche   | Pokemon
+ Stephanie Mendez | Digimon
+ Stephanie Mendez | Pokemon
+ Jack Harkness    | Digimon
+  Maisy Smith     |
+(5 rows)*/
+
+--List all animals that visited Stephanie Mendez between April 1st and August 30th, 2020.
+
+SELECT animals.name ,visits.date_of_visit 
+FROM  animals 
+JOIN visits
+ON animals.id=visits.animal_id
+JOIN vets
+ON vets.id=visits.vets_id
+WHERE vets.full_name='Stephanie Mendez'
+AND visits.date_of_visit 
+BETWEEN '2020-04-01'AND '2020-08-30';
+/*  
+name   | date_of_visit
+---------+---------------
+ Agumon  | 2020-07-22
+ Blossom | 2020-05-24
+(2 rows)*/
+
+--What animal has the most visits to vets?
+SElECT animals.name ,COUNT(visits.animal_id) as total_visit
+FROM animals
+JOIN visits
+ON animals.id=visits.animal_id
+GROUP BY animals.name
+ORDER BY total_visit DESC LIMIT 1;
+
+/*  name   | total_visit
+---------+-------------
+ Boarmon |           4
+(1 row)*/
+
+
+--Who was Maisy Smith's first visit?
+SELECT vets.full_name ,animals.name ,visits.date_of_visit 
+FROM  animals 
+JOIN visits
+ON animals.id=visits.animal_id
+JOIN vets
+ON vets.id=visits.vets_id
+ WHERE vets.full_name ='Maisy Smith' 
+ ORDER BY visits.date_of_visit ASC LIMIT 1;
+/*
+   name     |  name   | date_of_visit
+-------------+---------+---------------
+ Maisy Smith | Boarmon | 2019-01-24
+(1 row)
+*/
+--Details for most recent visit: animal information, vet information, and date of visit.
+SELECT
+	date_of_visit,
+	animals.date_of_birth as animal_dob,
+	animals.escape_attempts,
+	animals.neutered,
+	animals.weight_kg as animal_weight,
+	vets.full_name as vet_name,
+	vets.age as vet_age,
+	vets.date_of_graduation
+from visits
+JOIN animals ON animals.id = visits.animal_id
+JOIN vets ON vets.id = visits.vets_id
+ORDER BY date_of_visit DESC
+LIMIT 1;
+/*
+ date_of_visit | animal_dob | escape_attempts | neutered | animal_weight |   vet_name   | vet_age | date_of_graduation
+---------------+------------+-----------------+----------+---------------+--------------+---------+--------------------
+ 2021-05-04    | 2017-05-12 |               5 | t        |          11.0 |  Maisy Smith |      26 | 2019-01-17
+(1 row)
+*/
+--How many visits were with a vet that did not specialize in that animal's species?
+SELECT COUNT(*)
+FROM visits
+JOIN animals ON animals.id = visits.animal_id
+JOIN vets ON vets.id = visits.vets_id
+JOIN specializations ON specializations.vets_id = visits.vets_id
+WHERE animals.species_id != specializations.species_id;
+/*
+ count
+-------
+     6
+(1 row)
+*/
+--What specialty should Maisy Smith consider getting? Look for the species she gets the most.
+SELECT species.name as specialization , COUNT(visits.animal_id) from visits
+JOIN vets ON vets.id = visits.vets_id
+JOIN animals ON animals.id = visits.animal_id
+JOIN species ON species.id = animals.species_id
+WHERE vets.full_name LIKE 'Maisy Smith'
+GROUP BY species.name;
+
+/*
+ specialization | count
+----------------+-------
+ Digimon        |     7
+ Pokemon        |     3
+(2 rows)
+*/ 
+SELECT vets.name, animals.name, date_of_visit FROM vets JOIN visits ON vets.id=visits.vets_id
+JOIN animals ON animals.id= visits.animals_id WHERE vets.name ='Maisy Smith' ORDER BY visits.date_of_visit ASC LIMIT 1;
