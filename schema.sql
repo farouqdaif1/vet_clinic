@@ -78,3 +78,14 @@ CREATE TABLE visits(
     CONSTRAINT fk_animals FOREIGN KEY(animal_id) REFERENCES animals(id)
 );
 
+INSERT INTO visits (animal_id, vets_id, date_of_visit) SELECT * FROM (SELECT id FROM animals) animal_ids, (SELECT id FROM vets) vets_ids, generate_series('1980-01-01'::timestamp, '2021-01-01', '4 hours') visit_timestamp;
+--------------------------------------------------------------------------------------                   
+
+
+                                        -----WEEK 2 DAY 1-----
+
+ALTER TABLE owners ADD COLUMN email VARCHAR(120);
+
+CREATE INDEX visits_animals_id_idx ON visits(animals_id);
+CREATE INDEX visits_vets_id_idx ON visits(vets_id);
+CREATE INDEX visits_owners_id_idx ON owners(email);
