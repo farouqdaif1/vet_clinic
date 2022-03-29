@@ -18,6 +18,11 @@ This repository includes files with plain SQL that can be used to recreate a dat
 
 - GitHub: [@farouqdaif1](https://github.com/farouqdaif1)
 - LinkedIn: [@Farouq Daif ](https://www.linkedin.com/in/farouqdaif/)
+
+👤 **Jos kalenda**
+
+- GitHub: [@Jos](https://github.com/joskalenda)
+- LinkedIn: [@Jos](https://www.linkedin.com/in/joskalenda/)
 ## 🤝 Contributing
 
 Contributions, issues, and feature requests are welcome!
