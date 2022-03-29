@@ -1,7 +1,10 @@
 # Vet-clinic
 
-> In this project I've created a database use a relational database to create the initial data structure for a vet clinic. I will create a table to store animals' information, insert some data into it, and query it.
 
+
+> In this project I've created a database use a relational database to create the initial data structure for a vet clinic. You will create a table to store animals' information, insert some data into it, and query it.
+
+![VET CLINIC](https://github.com/farouqdaif1/vet_clinic/blob/digram/image/Screenshot.png?raw=true)
 
 ## Getting Started
 
@@ -19,7 +22,7 @@ This repository includes files with plain SQL that can be used to recreate a dat
 - GitHub: [@farouqdaif1](https://github.com/farouqdaif1)
 - LinkedIn: [@Farouq Daif ](https://www.linkedin.com/in/farouqdaif/)
 
-👤 **Jos kalenda**
+👤 **Jos Kalenda**
 
 - GitHub: [@Jos](https://github.com/joskalenda)
 - LinkedIn: [@Jos](https://www.linkedin.com/in/joskalenda/)
